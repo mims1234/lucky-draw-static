@@ -900,30 +900,30 @@ select option {
 
 @keyframes scanPulse {
     0% {
-        box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+        box-shadow: 0 0 10px var(--accent-cyan);
     }
     50% {
-        box-shadow: 0 0 28px rgba(0, 212, 255, 0.9);
+        box-shadow: 0 0 28px var(--accent-cyan);
     }
     100% {
-        box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+        box-shadow: 0 0 10px var(--accent-cyan);
     }
 }
 
 @keyframes rarityGlow {
     0% {
-        box-shadow: 0 0 12px rgba(255, 200, 68, 0.4);
-        border-color: var(--rarity-legendary);
+        box-shadow: 0 0 12px var(--accent-cyan);
+        border-color: var(--accent-cyan);
         transform: scale(1.08);
     }
     50% {
-        box-shadow: 0 0 36px rgba(255, 200, 68, 0.9);
+        box-shadow: 0 0 36px var(--accent-cyan);
         border-color: #fff7d0;
         transform: scale(1.14);
     }
     100% {
-        box-shadow: 0 0 12px rgba(255, 200, 68, 0.4);
-        border-color: var(--rarity-legendary);
+        box-shadow: 0 0 12px var(--accent-cyan);
+        border-color: var(--accent-cyan);
         transform: scale(1.08);
     }
 }
