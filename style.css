@@ -298,7 +298,8 @@ nav {
     width: 100%;
     background: var(--bg-panel);
     border: 1px solid var(--border-glow);
-    border-radius: 6px;
+    border-radius: 4px;
+    clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -324,7 +325,7 @@ nav {
 
 .box:hover:not(.disabled) {
     border-color: var(--border-bright);
-    box-shadow: 0 0 16px rgba(0, 212, 255, 0.18);
+    box-shadow: 0 0 18px rgba(255, 90, 31, 0.24);
     transform: scale(1.04);
 }
 
@@ -377,24 +378,24 @@ nav {
 .box.revealed[data-rarity="Legendary"] {
     border-color: var(--rarity-legendary);
     box-shadow:
-        0 0 24px rgba(255, 200, 68, 0.55),
-        inset 0 0 12px rgba(255, 200, 68, 0.08);
+        0 0 26px rgba(255, 209, 102, 0.6),
+        inset 0 0 16px rgba(255, 209, 102, 0.12);
 }
 .box.revealed[data-rarity="Epic"] {
     border-color: var(--rarity-epic);
     box-shadow:
-        0 0 20px rgba(168, 85, 247, 0.5),
-        inset 0 0 10px rgba(168, 85, 247, 0.07);
+        0 0 22px rgba(255, 122, 47, 0.55),
+        inset 0 0 12px rgba(255, 122, 47, 0.1);
 }
 .box.revealed[data-rarity="Rare"] {
     border-color: var(--rarity-rare);
     box-shadow:
-        0 0 18px rgba(59, 130, 246, 0.45),
-        inset 0 0 8px rgba(59, 130, 246, 0.07);
+        0 0 18px rgba(196, 122, 44, 0.45),
+        inset 0 0 8px rgba(196, 122, 44, 0.09);
 }
 .box.revealed[data-rarity="Common"] {
     border-color: var(--rarity-common);
-    box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+    box-shadow: 0 0 10px rgba(181, 194, 103, 0.3);
 }
 
 /* ── Highlight (spinning animation) ────────────────────────── */
@@ -457,7 +458,7 @@ nav {
 .side-panel {
     background: var(--bg-deep);
     border: 1px solid var(--border-glow);
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 20px 16px;
     position: sticky;
     top: 76px;
@@ -486,7 +487,7 @@ nav {
     border-bottom: 1px solid var(--border-glow);
 }
 .side-panel h2::before {
-    content: "▶  ";
+    content: "◆  ";
     font-size: 9px;
     opacity: 0.7;
 }
