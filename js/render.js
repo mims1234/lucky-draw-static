@@ -189,12 +189,12 @@ function renderNoPrizeSettings() {
   container.innerHTML = `
         <div class="settings-section">
             <h2>No Prize Settings</h2>
-            <div class="no-prize-item">
-                <div class="no-prize-item-header">
-                    <span class="no-prize-item-name">${state.noPrize.name}</span>
+            <div class="prize-item">
+                <div class="prize-item-header">
+                    <span class="prize-item-index">No Prize</span>
                     <span class="rarity-badge rarity-${state.noPrize.rarity.toLowerCase()}">${state.noPrize.rarity}</span>
                 </div>
-                <div class="no-prize-item-fields">
+                <div class="prize-item-fields">
                     <div class="field-group">
                         <label>Name</label>
                         <input type="text" value="${state.noPrize.name}"

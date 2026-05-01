@@ -10,8 +10,8 @@ const DEFAULT_PRIZES = [
     fontColor: "#000000",
     quantity: 1,
     mediaUrl:
-      "https://cdn.mazoku.cc/cards/476e1140-dccb-4e81-aa8e-62be891a3042/card?width=100",
-    mediaType: "video",
+      "https://cdn7.mazoku.cc/cards/b354ec9f-cab2-48e9-837c-659b775bd443.webp",
+    mediaType: "image",
   },
   {
     name: "Second Prize",
@@ -20,7 +20,7 @@ const DEFAULT_PRIZES = [
     fontColor: "#FFFFFF",
     quantity: 2,
     mediaUrl:
-      "http://15.204.204.211:9000/mazokubucket/Berserk_Guts_SR.png?width=100",
+      "https://cdn7.mazoku.cc/cards/15313fbf-cb5a-4acd-9852-5b9cddc9ed6b.webp",
     mediaType: "image",
   },
   {
@@ -30,17 +30,17 @@ const DEFAULT_PRIZES = [
     fontColor: "#FFFFFF",
     quantity: 3,
     mediaUrl:
-      "http://15.204.204.211:9000/mazokubucket/League_of_Legends_Yone_R.png",
+      "https://cdn7.mazoku.cc/cards/7e223388-62a6-4ebe-99bc-778e8feba751.webp",
     mediaType: "image",
   },
   {
-    name: "Consolation",
+    name: "GOAT",
     rarity: "Common",
     color: "#32CD32",
     fontColor: "#000000",
     quantity: 6,
-    mediaUrl: "https://ibb.co/mCvKVwJ",
-    mediaType: "image",
+    mediaUrl: "",
+    mediaType: "none",
   },
 ];
 
@@ -49,7 +49,7 @@ let state = {
   noPrize: {
     name: "No Prize",
     rarity: "Common",
-    color: "#808080",
+    color: "#333333",
     fontColor: "#FFFFFF",
     mediaUrl: "",
     mediaType: "none",
