@@ -20,6 +20,12 @@ document.addEventListener("DOMContentLoaded", () => {
   initNavigation();
   loadState();
 
+  // Apply saved animation color
+  document.documentElement.style.setProperty(
+    "--accent-cyan",
+    state.animationHighlightColor,
+  );
+
   // ── Starfield canvas ─────────────────────────────────────
   initStarfield();
 });
