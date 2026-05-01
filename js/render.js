@@ -5,12 +5,12 @@
 // ── Media helper ─────────────────────────────────────────────
 
 function buildMediaElement(prize) {
-  if (!prize.mediaUrl || prize.mediaType === "none") return "";
+  if (!prize || !prize.mediaUrl || prize.mediaType === "none") return "";
   if (prize.mediaType === "video") {
     return `<video src="${prize.mediaUrl}" autoplay loop muted playsinline crossorigin="anonymous"></video>`;
   }
-  const fallbackSvg = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100' fill='%23111e35'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%237a9cc4' font-size='12'>${encodeURIComponent(prize.name)}</text></svg>`;
-  return `<img src="${prize.mediaUrl}" alt="${prize.name}" crossorigin="anonymous" onerror="this.onerror=null;this.src='${fallbackSvg}';">`;
+  const fallbackSvg = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100' fill='%23111e35'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%237a9cc4' font-size='12'>${encodeURIComponent(prize.name || "Prize")}</text></svg>`;
+  return `<img src="${prize.mediaUrl}" alt="${prize.name || "Prize"}" crossorigin="anonymous" onerror="this.onerror=null;this.src='${fallbackSvg}';">`;
 }
 
 // ── Boxes ────────────────────────────────────────────────────
@@ -101,22 +101,28 @@ function renderBoxes(shouldShuffle = true) {
 // ── Prize Preview Modal ─────────────────────────────────
 
 function showPrizePreview(index) {
+  if (index < 0 || index >= state.prizes.length) return;
+
   const prize = state.prizes[index];
+  if (!prize) return;
+
   const modal = document.createElement("div");
   modal.className = "prize-preview-modal";
+
+  const mediaContent =
+    prize.mediaType === "none" || !prize.mediaUrl
+      ? `<div class="prize-preview-modal-text" style="color:${prize.fontColor || "#FFFFFF"}; background:${prize.color || "#808080"};">${prize.name || "No Name"}</div>`
+      : buildMediaElement(prize);
+
   modal.innerHTML = `
         <div class="prize-preview-modal-content">
             <span class="prize-preview-modal-close">&times;</span>
             <div class="prize-preview-modal-media">
-                ${
-                  prize.mediaType === "none"
-                    ? `<div class="prize-preview-modal-text" style="color:${prize.fontColor}; background:${prize.color};">${prize.name}</div>`
-                    : buildMediaElement(prize)
-                }
+                ${mediaContent}
             </div>
             <div class="prize-preview-modal-info">
-                <h3 class="prize-preview-modal-name" style="color:${prize.fontColor}">${prize.name}</h3>
-                <div class="prize-preview-modal-rarity rarity-${prize.rarity.toLowerCase()}">${prize.rarity}</div>
+                <h3 class="prize-preview-modal-name" style="color:${prize.fontColor || "#FFFFFF"}">${prize.name || "No Name"}</h3>
+                <div class="prize-preview-modal-rarity rarity-${prize.rarity ? prize.rarity.toLowerCase() : "common"}">${prize.rarity || "Common"}</div>
             </div>
         </div>
     `;
@@ -127,13 +133,20 @@ function showPrizePreview(index) {
   modal
     .querySelector(".prize-preview-modal-close")
     .addEventListener("click", () => {
-      modal.remove();
+      modal.classList.remove("prize-preview-modal--visible");
+      setTimeout(() => modal.remove(), 300);
     });
 
   modal.addEventListener("click", (e) => {
     if (e.target === modal) {
-      modal.remove();
+      modal.classList.remove("prize-preview-modal--visible");
+      setTimeout(() => modal.remove(), 300);
     }
+  });
+
+  // Trigger animation
+  requestAnimationFrame(() => {
+    modal.classList.add("prize-preview-modal--visible");
   });
 }
 
@@ -142,7 +155,7 @@ function showPrizePreview(index) {
 function renderPrizeImages() {
   const container = document.getElementById("prizeImages");
   container.innerHTML = state.prizes
-    .filter((p) => p.mediaUrl || p.mediaType === "none")
+    .filter((p) => p.mediaUrl || p.mediaType === "none" || !p.mediaUrl)
     .map(
       (p) => `
             <div class="prize-preview" data-rarity="${p.rarity}" data-index="${state.prizes.indexOf(p)}">
@@ -158,7 +171,9 @@ function renderPrizeImages() {
   container.querySelectorAll(".prize-preview").forEach((preview) => {
     preview.addEventListener("click", function () {
       const index = parseInt(this.dataset.index);
-      showPrizePreview(index);
+      if (index >= 0 && index < state.prizes.length) {
+        showPrizePreview(index);
+      }
     });
   });
 }
