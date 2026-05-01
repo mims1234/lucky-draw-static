@@ -23,10 +23,12 @@ async function startAnimation() {
   let lastHighlighted = null;
 
   while (Date.now() - startTime < duration) {
+    // Remove highlight from all boxes
     boxes.forEach((b) => b.classList.remove("custom-highlight"));
 
     const pick = enabledBoxes[Math.floor(Math.random() * enabledBoxes.length)];
-    pick.classList.add("custom-highlight");
+    // Add standard highlight class for the fast movement
+    pick.classList.add("highlight");
     lastHighlighted = pick;
 
     speed = Math.min(300, speed * 1.1);
@@ -34,8 +36,13 @@ async function startAnimation() {
   }
 
   if (lastHighlighted) {
+    // Remove standard highlight and add custom-highlight for the final blink
+    lastHighlighted.classList.remove("highlight");
+    lastHighlighted.classList.add("custom-highlight");
     lastHighlighted.classList.add("final-select");
+
     await new Promise((resolve) => setTimeout(resolve, 1500));
+
     if (lastHighlighted.classList.contains("revealed")) {
       lastHighlighted.classList.remove("final-select");
     }
