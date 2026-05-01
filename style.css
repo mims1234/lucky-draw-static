@@ -414,9 +414,15 @@ nav {
 .box-wrapper:hover .toggle-box {
     opacity: 1;
 }
-.toggle-box.is-disabled {
+.toggle-box:hover {
+    background: var(--accent-red);
+    color: white;
     border-color: var(--accent-red);
-    color: var(--accent-red);
+}
+.toggle-box.is-disabled {
+    background: var(--accent-red);
+    color: white;
+    border-color: var(--accent-red);
     opacity: 1;
 }
 
