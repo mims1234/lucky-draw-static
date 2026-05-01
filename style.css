@@ -918,7 +918,7 @@ select option {
     }
     50% {
         box-shadow: 0 0 36px var(--accent-cyan);
-        border-color: #fff7d0;
+        border-color: var(--accent-cyan);
         transform: scale(1.14);
     }
     100% {
