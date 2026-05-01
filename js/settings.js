@@ -6,7 +6,7 @@ function addPrize() {
   state.prizes.push({
     name: "New Prize",
     rarity: "Common",
-    color: "#00d4ff",
+    color: "#ff5a1f",
     fontColor: "#000000",
     quantity: 1,
     mediaUrl: "",
@@ -75,7 +75,7 @@ function clearLocalStorage() {
         mediaUrl: "",
         mediaType: "none",
       },
-      animationHighlightColor: "#00d4ff",
+      animationHighlightColor: "#ff5a1f",
       boxCount: 25,
       isAnimating: false,
       disabledBoxes: new Set(),
@@ -90,7 +90,7 @@ function clearLocalStorage() {
     renderBoxes(false);
     renderPrizeImages();
     // Reset animation highlight CSS variable only
-    document.documentElement.style.setProperty("--anim-highlight", "#00d4ff");
+    document.documentElement.style.setProperty("--anim-highlight", "#ff5a1f");
     showToast("Reset to default state.");
   } catch (err) {
     console.error("Reset error:", err);

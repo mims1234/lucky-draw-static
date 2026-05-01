@@ -54,7 +54,7 @@ let state = {
     mediaUrl: "",
     mediaType: "none",
   },
-  animationHighlightColor: "#00d4ff",
+  animationHighlightColor: "#ff5a1f",
   boxCount: 25,
   isAnimating: false,
   disabledBoxes: new Set(),
@@ -117,7 +117,7 @@ function loadState() {
         mediaUrl: "",
         mediaType: "none",
       },
-      animationHighlightColor: loaded.animationHighlightColor || "#00d4ff",
+      animationHighlightColor: loaded.animationHighlightColor || "#ff5a1f",
       boxCount: 25,
       isAnimating: false,
       disabledBoxes: new Set(loaded.disabledBoxes || []),
@@ -134,7 +134,7 @@ function loadState() {
       mediaUrl: "",
       mediaType: "none",
     };
-    state.animationHighlightColor = "#00d4ff";
+    state.animationHighlightColor = "#ff5a1f";
     shuffleAndAssignPrizes();
     saveState();
   }

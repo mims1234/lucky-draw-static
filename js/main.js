@@ -38,7 +38,7 @@ function initStarfield() {
 
   const ctx = canvas.getContext("2d");
 
-  const STAR_COUNT = 140;
+  const STAR_COUNT = 120;
   let stars = [];
 
   function resize() {
@@ -67,17 +67,18 @@ function initStarfield() {
     frame++;
 
     stars.forEach((star) => {
-      // Subtle twinkle
-      const twinkle = 0.85 + 0.15 * Math.sin(frame * 0.02 + star.twinkleOffset);
+      // Subtle ember pulse
+      const twinkle = 0.8 + 0.2 * Math.sin(frame * 0.025 + star.twinkleOffset);
       ctx.beginPath();
       ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(180, 220, 255, ${star.opacity * twinkle})`;
+      ctx.fillStyle = `rgba(255, 128, 48, ${star.opacity * twinkle})`;
       ctx.fill();
 
-      // Drift downward
-      star.y += star.speed;
-      if (star.y > canvas.height) {
-        star.y = 0;
+      // Heat embers drift upward
+      star.y -= star.speed;
+      star.x += Math.sin(frame * 0.01 + star.twinkleOffset) * 0.12;
+      if (star.y < 0) {
+        star.y = canvas.height;
         star.x = Math.random() * canvas.width;
       }
     });
