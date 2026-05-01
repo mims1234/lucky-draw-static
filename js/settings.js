@@ -31,7 +31,8 @@ function updatePrize(index, field, value) {
 
 function updateNoPrize(field, value) {
   if (field === "mediaUrl") {
-    state.noPrize.mediaType = detectMediaType(value);
+    // If URL is empty, set to none, otherwise detect type
+    state.noPrize.mediaType = value ? detectMediaType(value) : "none";
   }
   state.noPrize[field] = value;
   shuffleAndAssignPrizes();
