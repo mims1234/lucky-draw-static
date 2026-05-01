@@ -99,20 +99,29 @@ body::after {
 
 /* ── Navigation ────────────────────────────────────────────── */
 nav {
-    background: var(--bg-deep);
-    border-bottom: 1px solid var(--border-glow);
-    padding: 0;
+    background: rgba(8, 13, 26, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-glow);
+    margin: 15px auto 30px;
+    max-width: 1160px;
+    padding: 0 10px;
     position: sticky;
-    top: 0;
+    top: 15px;
     z-index: 200;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+    border-radius: 16px;
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.5),
+        inset 0 0 15px rgba(0, 212, 255, 0.05);
+    transition: all 0.3s ease;
 }
 
 .nav-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 60px;
+    height: 64px;
+    padding: 0 15px;
 }
 
 /* Logo */
@@ -152,21 +161,31 @@ nav {
     letter-spacing: 1.5px;
     color: var(--text-secondary);
     text-decoration: none;
-    padding: 6px 18px;
-    border-left: 3px solid transparent;
+    padding: 8px 20px;
+    border-radius: 8px;
     transition: all 0.25s;
     text-transform: uppercase;
+    position: relative;
 }
 .nav-link:hover {
     color: var(--text-primary);
-    background: var(--bg-surface);
-    border-left-color: var(--accent-cyan-dim);
+    background: var(--accent-cyan-faint);
 }
 .nav-link.active {
     color: var(--accent-cyan);
-    background: var(--bg-surface);
-    border-left-color: var(--accent-cyan);
+    background: var(--accent-cyan-faint);
     text-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+}
+.nav-link.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    right: 20%;
+    height: 2px;
+    background: var(--accent-cyan);
+    box-shadow: 0 0 10px var(--accent-cyan);
+    border-radius: 2px;
 }
 
 /* Reset storage button */
@@ -987,6 +1006,31 @@ select option {
 }
 
 @media (max-width: 600px) {
+    nav {
+        margin: 10px;
+        border-radius: 12px;
+        top: 10px;
+    }
+    .nav-content {
+        height: auto;
+        padding: 12px;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+        gap: 8px;
+    }
+    .nav-link {
+        padding: 6px 12px;
+        font-size: 10px;
+    }
+    .reset-storage-btn {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+    }
     .boxes-container {
         grid-template-columns: repeat(4, 1fr);
         gap: 8px;
