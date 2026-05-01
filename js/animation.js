@@ -43,17 +43,18 @@ async function startAnimation() {
     lastHighlighted.classList.remove("highlight");
     lastHighlighted.classList.add("custom-highlight");
     lastHighlighted.classList.add("final-select");
+    state.isAnimating = false;
 
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    if (lastHighlighted.classList.contains("revealed")) {
+    // Wait for the box to be clicked, then clean up classes
+    const cleanup = () => {
       lastHighlighted.classList.remove("final-select");
-    }
-    lastHighlighted.classList.remove("custom-highlight");
-    lastHighlighted.click();
+      lastHighlighted.classList.remove("custom-highlight");
+      lastHighlighted.removeEventListener("click", cleanup);
+    };
+    lastHighlighted.addEventListener("click", cleanup);
+  } else {
+    state.isAnimating = false;
   }
-
-  state.isAnimating = false;
 }
 
 function shuffleBoxes() {
