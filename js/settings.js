@@ -89,6 +89,8 @@ function clearLocalStorage() {
     renderAnimationSettings();
     renderBoxes(false);
     renderPrizeImages();
+    // Reset CSS variable
+    document.documentElement.style.setProperty("--accent-cyan", "#00d4ff");
     showToast("Reset to default state.");
   } catch (err) {
     console.error("Reset error:", err);
