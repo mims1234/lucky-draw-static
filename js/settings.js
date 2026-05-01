@@ -47,7 +47,7 @@ function updateAnimationHighlightColor(value) {
   state.animationHighlightColor = value;
   saveState();
   // Update CSS variable for highlighting
-  document.documentElement.style.setProperty("--accent-cyan", value);
+  document.documentElement.style.setProperty("--anim-highlight", value);
   renderAnimationSettings();
 }
 

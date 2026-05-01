@@ -12,6 +12,7 @@
     --bg-surface-alt: #152236;
 
     --accent-cyan: #00d4ff;
+    --anim-highlight: #00d4ff;
     --accent-cyan-dim: #0099bb;
     --accent-cyan-faint: rgba(0, 212, 255, 0.07);
     --accent-gold: #ffc844;
@@ -902,34 +903,38 @@ select option {
         transform: scale(1);
         opacity: 1;
     }
+/* Custom class for animation highlight color */
+.box.custom-highlight {
+    border-color: var(--anim-highlight) !important;
+    box-shadow: 0 0 22px var(--anim-highlight) !important;
 }
 
 @keyframes scanPulse {
     0% {
-        box-shadow: 0 0 10px var(--accent-cyan);
+        box-shadow: 0 0 10px var(--anim-highlight);
     }
     50% {
-        box-shadow: 0 0 28px var(--accent-cyan);
+        box-shadow: 0 0 28px var(--anim-highlight);
     }
     100% {
-        box-shadow: 0 0 10px var(--accent-cyan);
+        box-shadow: 0 0 10px var(--anim-highlight);
     }
 }
 
 @keyframes rarityGlow {
     0% {
-        box-shadow: 0 0 12px var(--accent-cyan);
-        border-color: var(--accent-cyan);
+        box-shadow: 0 0 12px var(--anim-highlight);
+        border-color: var(--anim-highlight);
         transform: scale(1.08);
     }
     50% {
-        box-shadow: 0 0 36px var(--accent-cyan);
-        border-color: var(--accent-cyan);
+        box-shadow: 0 0 36px var(--anim-highlight);
+        border-color: var(--anim-highlight);
         transform: scale(1.14);
     }
     100% {
-        box-shadow: 0 0 12px var(--accent-cyan);
-        border-color: var(--accent-cyan);
+        box-shadow: 0 0 12px var(--anim-highlight);
+        border-color: var(--anim-highlight);
         transform: scale(1.08);
     }
 }

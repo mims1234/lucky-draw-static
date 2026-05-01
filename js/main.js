@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Apply saved animation color
   document.documentElement.style.setProperty(
-    "--accent-cyan",
+    "--anim-highlight",
     state.animationHighlightColor,
   );
 
