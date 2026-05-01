@@ -23,10 +23,10 @@ async function startAnimation() {
   let lastHighlighted = null;
 
   while (Date.now() - startTime < duration) {
-    boxes.forEach((b) => b.classList.remove("highlight"));
+    boxes.forEach((b) => b.classList.remove("custom-highlight"));
 
     const pick = enabledBoxes[Math.floor(Math.random() * enabledBoxes.length)];
-    pick.classList.add("highlight");
+    pick.classList.add("custom-highlight");
     lastHighlighted = pick;
 
     speed = Math.min(300, speed * 1.1);
@@ -39,7 +39,7 @@ async function startAnimation() {
     if (lastHighlighted.classList.contains("revealed")) {
       lastHighlighted.classList.remove("final-select");
     }
-    lastHighlighted.classList.remove("highlight");
+    lastHighlighted.classList.remove("custom-highlight");
     lastHighlighted.click();
   }
 

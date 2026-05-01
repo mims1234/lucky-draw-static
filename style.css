@@ -302,8 +302,8 @@ nav {
 }
 
 .box:hover:not(.disabled) {
-    border-color: var(--accent-cyan);
-    box-shadow: 0 0 16px var(--accent-cyan);
+    border-color: var(--border-bright);
+    box-shadow: 0 0 16px rgba(0, 212, 255, 0.18);
     transform: scale(1.04);
 }
 
@@ -383,6 +383,12 @@ nav {
     transform: scale(1.08);
     z-index: 2;
     animation: scanPulse 0.35s ease-in-out;
+}
+
+/* Custom class for animation highlight color */
+.box.custom-highlight {
+    border-color: var(--accent-cyan) !important;
+    box-shadow: 0 0 22px var(--accent-cyan) !important;
 }
 
 /* ── Final selection ────────────────────────────────────────── */
