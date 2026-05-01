@@ -1,39 +1,39 @@
 /* ============================================================
-   StarDrive Design System — Lucky Draw
+   Vulcan Design System — Lucky Draw
    Dark Mode Only
    ============================================================ */
 
 /* ── CSS Variables ─────────────────────────────────────────── */
 :root {
-    --bg-void: #05070f;
-    --bg-deep: #080d1a;
-    --bg-panel: #0d1526;
-    --bg-surface: #111e35;
-    --bg-surface-alt: #152236;
+    --bg-void: #080504;
+    --bg-deep: #120b08;
+    --bg-panel: #1d120d;
+    --bg-surface: #2a1910;
+    --bg-surface-alt: #3a2113;
 
-    --accent-cyan: #00d4ff;
-    --anim-highlight: #00d4ff;
-    --accent-cyan-dim: #0099bb;
-    --accent-cyan-faint: rgba(0, 212, 255, 0.07);
-    --accent-gold: #ffc844;
-    --accent-purple: #a855f7;
-    --accent-blue: #3b82f6;
-    --accent-green: #22c55e;
-    --accent-red: #ef4444;
+    --accent-cyan: #ff5a1f;
+    --anim-highlight: #ff5a1f;
+    --accent-cyan-dim: #b93613;
+    --accent-cyan-faint: rgba(255, 90, 31, 0.1);
+    --accent-gold: #ffd166;
+    --accent-purple: #c47a2c;
+    --accent-blue: #7f5539;
+    --accent-green: #b5c267;
+    --accent-red: #ff3b1f;
 
-    --text-primary: #e2eaf8;
-    --text-secondary: #7a9cc4;
-    --text-dim: #3d5a80;
+    --text-primary: #fff1df;
+    --text-secondary: #d5a36d;
+    --text-dim: #8a5a36;
 
-    --border-glow: rgba(0, 212, 255, 0.22);
-    --border-bright: rgba(0, 212, 255, 0.55);
+    --border-glow: rgba(255, 90, 31, 0.25);
+    --border-bright: rgba(255, 132, 48, 0.68);
     --border-subtle: rgba(255, 255, 255, 0.06);
 
     /* Rarity colours */
-    --rarity-legendary: #ffc844;
-    --rarity-epic: #a855f7;
-    --rarity-rare: #3b82f6;
-    --rarity-common: #22c55e;
+    --rarity-legendary: #ffd166;
+    --rarity-epic: #ff7a2f;
+    --rarity-rare: #c47a2c;
+    --rarity-common: #b5c267;
 }
 
 /* ── Reset ─────────────────────────────────────────────────── */
@@ -52,11 +52,11 @@ html {
 
 body {
     background-color: var(--bg-void);
-    background-image: radial-gradient(
-        ellipse 80% 50% at 50% 0%,
-        rgba(0, 212, 255, 0.05) 0%,
-        transparent 70%
-    );
+    background-image:
+        radial-gradient(ellipse 65% 42% at 50% -10%, rgba(255, 90, 31, 0.16) 0%, transparent 68%),
+        radial-gradient(ellipse 45% 28% at 20% 100%, rgba(255, 209, 102, 0.08) 0%, transparent 70%),
+        linear-gradient(135deg, rgba(255, 90, 31, 0.04) 0 25%, transparent 25% 50%, rgba(255, 90, 31, 0.025) 50% 75%, transparent 75%);
+    background-size: auto, auto, 72px 72px;
     color: var(--text-primary);
     font-family: "Share Tech Mono", "Courier New", monospace;
     min-height: 100vh;
@@ -99,7 +99,7 @@ body::after {
 
 /* ── Navigation ────────────────────────────────────────────── */
 nav {
-    background: rgba(8, 13, 26, 0.8);
+    background: rgba(18, 11, 8, 0.86);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border-glow);
@@ -109,10 +109,11 @@ nav {
     position: sticky;
     top: 15px;
     z-index: 200;
-    border-radius: 16px;
+    border-radius: 6px;
+    clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
     box-shadow:
         0 10px 30px rgba(0, 0, 0, 0.5),
-        inset 0 0 15px rgba(0, 212, 255, 0.05);
+        inset 0 0 18px rgba(255, 90, 31, 0.08);
     transition: all 0.3s ease;
 }
 
@@ -131,20 +132,20 @@ nav {
     font-size: 20px;
     color: var(--accent-cyan);
     text-decoration: none;
-    text-shadow: 0 0 18px rgba(0, 212, 255, 0.7);
+    text-shadow: 0 0 18px rgba(255, 90, 31, 0.7);
     letter-spacing: 2px;
     transition: text-shadow 0.3s;
 }
 .logo::before {
-    content: "[ ";
+    content: "▲ ";
     color: var(--text-dim);
 }
 .logo::after {
-    content: " ]";
+    content: " ▲";
     color: var(--text-dim);
 }
 .logo:hover {
-    text-shadow: 0 0 30px rgba(0, 212, 255, 1);
+    text-shadow: 0 0 30px rgba(255, 132, 48, 1);
 }
 
 /* Nav links */
