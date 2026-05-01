@@ -27,6 +27,7 @@ function updatePrize(index, field, value) {
   saveState();
   renderBoxes(false);
   renderPrizeImages();
+  renderPrizeList(); // Re-render list to update badges
 }
 
 function updateNoPrize(field, value) {
@@ -39,7 +40,7 @@ function updateNoPrize(field, value) {
   saveState();
   renderBoxes(false);
   renderPrizeImages();
-  renderNoPrizeSettings();
+  renderNoPrizeSettings(); // Re-render to update badge
 }
 
 function deletePrize(index) {
