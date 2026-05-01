@@ -40,6 +40,7 @@ function renderBoxes(shouldShuffle = true) {
       box.classList.add("revealed");
       box.dataset.rarity = prize.rarity;
       box.style.setProperty("--prize-color", prize.color);
+      box.style.backgroundColor = prize.color;
 
       if (prize.mediaType === "none" || !prize.mediaUrl) {
         box.classList.add("text-only");
@@ -69,6 +70,7 @@ function renderBoxes(shouldShuffle = true) {
       this.classList.remove("final-select");
       this.dataset.rarity = p.rarity;
       this.style.setProperty("--prize-color", p.color);
+      this.style.backgroundColor = p.color;
 
       if (p.mediaType === "none" || !p.mediaUrl) {
         this.classList.add("text-only");
@@ -158,7 +160,7 @@ function renderPrizeImages() {
     .filter((p) => p.mediaUrl || p.mediaType === "none" || !p.mediaUrl)
     .map(
       (p) => `
-            <div class="prize-preview" data-rarity="${p.rarity}" data-index="${state.prizes.indexOf(p)}">
+            <div class="prize-preview" data-rarity="${p.rarity}" data-index="${state.prizes.indexOf(p)}" style="background-color: ${p.color};">
                 <div class="prize-preview-media">${buildMediaElement(p)}</div>
                 <div class="prize-preview-name rarity-${p.rarity.toLowerCase()}">${p.name}</div>
                 <div class="prize-preview-rarity">${p.rarity}</div>
