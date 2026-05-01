@@ -302,8 +302,8 @@ nav {
 }
 
 .box:hover:not(.disabled) {
-    border-color: var(--border-bright);
-    box-shadow: 0 0 16px rgba(0, 212, 255, 0.18);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 16px var(--accent-cyan);
     transform: scale(1.04);
 }
 
