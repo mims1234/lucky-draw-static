@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initNavigation();
   loadState();
 
-  // Apply saved animation color
+  // Apply saved animation highlight color (only affects final selection pulse)
   document.documentElement.style.setProperty(
     "--anim-highlight",
     state.animationHighlightColor,

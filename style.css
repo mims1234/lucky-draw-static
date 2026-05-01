@@ -386,10 +386,10 @@ nav {
     animation: scanPulse 0.35s ease-in-out;
 }
 
-/* Custom class for animation highlight color */
+/* Final selection custom highlight - only used for the winning box blink */
 .box.custom-highlight {
-    border-color: var(--accent-cyan) !important;
-    box-shadow: 0 0 22px var(--accent-cyan) !important;
+    border-color: var(--anim-highlight) !important;
+    box-shadow: 0 0 36px var(--anim-highlight) !important;
 }
 
 /* ── Final selection ────────────────────────────────────────── */
@@ -903,21 +903,21 @@ select option {
         transform: scale(1);
         opacity: 1;
     }
-/* Custom class for animation highlight color */
+/* Final selection custom highlight */
 .box.custom-highlight {
     border-color: var(--anim-highlight) !important;
-    box-shadow: 0 0 22px var(--anim-highlight) !important;
+    box-shadow: 0 0 36px var(--anim-highlight) !important;
 }
 
 @keyframes scanPulse {
     0% {
-        box-shadow: 0 0 10px var(--anim-highlight);
+        box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
     }
     50% {
-        box-shadow: 0 0 28px var(--anim-highlight);
+        box-shadow: 0 0 28px rgba(0, 212, 255, 0.9);
     }
     100% {
-        box-shadow: 0 0 10px var(--anim-highlight);
+        box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
     }
 }
 
