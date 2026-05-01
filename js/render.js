@@ -162,8 +162,8 @@ function renderPrizeImages() {
       (p) => `
             <div class="prize-preview" data-rarity="${p.rarity}" data-index="${state.prizes.indexOf(p)}" style="background-color: ${p.color};">
                 <div class="prize-preview-media">${buildMediaElement(p)}</div>
-                <div class="prize-preview-name rarity-${p.rarity.toLowerCase()}">${p.name}</div>
-                <div class="prize-preview-rarity">${p.rarity}</div>
+                <div class="prize-preview-name rarity-${p.rarity.toLowerCase()}" style="color: ${p.fontColor};">${p.name}</div>
+                <div class="prize-preview-rarity" style="color: ${p.fontColor};">${p.rarity}</div>
             </div>
         `,
     )
