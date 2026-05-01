@@ -5,7 +5,7 @@
 // ── Media helper ─────────────────────────────────────────────
 
 function buildMediaElement(prize) {
-  if (!prize.mediaUrl) return "";
+  if (!prize.mediaUrl || prize.mediaType === "none") return "";
   if (prize.mediaType === "video") {
     return `<video src="${prize.mediaUrl}" autoplay loop muted playsinline crossorigin="anonymous"></video>`;
   }
@@ -40,10 +40,16 @@ function renderBoxes(shouldShuffle = true) {
       box.classList.add("revealed");
       box.dataset.rarity = prize.rarity;
       box.style.setProperty("--prize-color", prize.color);
-      box.innerHTML = `
-                <div class="box-media">${buildMediaElement(prize)}</div>
-                <div class="box-title" style="color:${prize.fontColor}">${prize.name}</div>
-            `;
+
+      if (prize.mediaType === "none" || !prize.mediaUrl) {
+        box.classList.add("text-only");
+        box.innerHTML = `<div class="box-title" style="color:${prize.fontColor}">${prize.name}</div>`;
+      } else {
+        box.innerHTML = `
+                    <div class="box-media">${buildMediaElement(prize)}</div>
+                    <div class="box-title" style="color:${prize.fontColor}">${prize.name}</div>
+                `;
+      }
     } else {
       box.innerHTML = `<span class="box-question">?</span>`;
     }
@@ -63,10 +69,16 @@ function renderBoxes(shouldShuffle = true) {
       this.classList.remove("final-select");
       this.dataset.rarity = p.rarity;
       this.style.setProperty("--prize-color", p.color);
-      this.innerHTML = `
-                <div class="box-media">${buildMediaElement(p)}</div>
-                <div class="box-title" style="color:${p.fontColor}">${p.name}</div>
-            `;
+
+      if (p.mediaType === "none" || !p.mediaUrl) {
+        this.classList.add("text-only");
+        this.innerHTML = `<div class="box-title" style="color:${p.fontColor}">${p.name}</div>`;
+      } else {
+        this.innerHTML = `
+                    <div class="box-media">${buildMediaElement(p)}</div>
+                    <div class="box-title" style="color:${p.fontColor}">${p.name}</div>
+                `;
+      }
       state.revealedBoxes.add(idx);
       saveState();
     });
@@ -86,15 +98,54 @@ function renderBoxes(shouldShuffle = true) {
   }
 }
 
+// ── Prize Preview Modal ─────────────────────────────────
+
+function showPrizePreview(index) {
+  const prize = state.prizes[index];
+  const modal = document.createElement("div");
+  modal.className = "prize-preview-modal";
+  modal.innerHTML = `
+        <div class="prize-preview-modal-content">
+            <span class="prize-preview-modal-close">&times;</span>
+            <div class="prize-preview-modal-media">
+                ${
+                  prize.mediaType === "none"
+                    ? `<div class="prize-preview-modal-text" style="color:${prize.fontColor}; background:${prize.color};">${prize.name}</div>`
+                    : buildMediaElement(prize)
+                }
+            </div>
+            <div class="prize-preview-modal-info">
+                <h3 class="prize-preview-modal-name" style="color:${prize.fontColor}">${prize.name}</h3>
+                <div class="prize-preview-modal-rarity rarity-${prize.rarity.toLowerCase()}">${prize.rarity}</div>
+            </div>
+        </div>
+    `;
+
+  document.body.appendChild(modal);
+
+  // Close modal when clicking the close button or outside the modal
+  modal
+    .querySelector(".prize-preview-modal-close")
+    .addEventListener("click", () => {
+      modal.remove();
+    });
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.remove();
+    }
+  });
+}
+
 // ── Prize Images (side panel) ────────────────────────────────
 
 function renderPrizeImages() {
   const container = document.getElementById("prizeImages");
   container.innerHTML = state.prizes
-    .filter((p) => p.mediaUrl)
+    .filter((p) => p.mediaUrl || p.mediaType === "none")
     .map(
       (p) => `
-            <div class="prize-preview" data-rarity="${p.rarity}">
+            <div class="prize-preview" data-rarity="${p.rarity}" data-index="${state.prizes.indexOf(p)}">
                 <div class="prize-preview-media">${buildMediaElement(p)}</div>
                 <div class="prize-preview-name rarity-${p.rarity.toLowerCase()}">${p.name}</div>
                 <div class="prize-preview-rarity">${p.rarity}</div>
@@ -102,6 +153,72 @@ function renderPrizeImages() {
         `,
     )
     .join("");
+
+  // Add click event listeners to prize previews
+  container.querySelectorAll(".prize-preview").forEach((preview) => {
+    preview.addEventListener("click", function () {
+      const index = parseInt(this.dataset.index);
+      showPrizePreview(index);
+    });
+  });
+}
+
+// ── No Prize Customization (settings) ───────────────────────
+
+function renderNoPrizeSettings() {
+  const container = document.getElementById("noPrizeSettings");
+  if (!container) return;
+
+  container.innerHTML = `
+        <div class="settings-section">
+            <h2>No Prize Settings</h2>
+            <div class="no-prize-item">
+                <div class="no-prize-item-header">
+                    <span class="no-prize-item-name">${state.noPrize.name}</span>
+                    <span class="rarity-badge rarity-${state.noPrize.rarity.toLowerCase()}">${state.noPrize.rarity}</span>
+                </div>
+                <div class="no-prize-item-fields">
+                    <div class="field-group">
+                        <label>Name</label>
+                        <input type="text" value="${state.noPrize.name}"
+                            onchange="updateNoPrize('name', this.value)">
+                    </div>
+                    <div class="field-group">
+                        <label>Rarity</label>
+                        <select onchange="updateNoPrize('rarity', this.value)">
+                            <option value="Common" ${state.noPrize.rarity === "Common" ? "selected" : ""}>Common</option>
+                            <option value="Rare" ${state.noPrize.rarity === "Rare" ? "selected" : ""}>Rare</option>
+                            <option value="Epic" ${state.noPrize.rarity === "Epic" ? "selected" : ""}>Epic</option>
+                            <option value="Legendary" ${state.noPrize.rarity === "Legendary" ? "selected" : ""}>Legendary</option>
+                        </select>
+                    </div>
+                    <div class="field-group field-group--color">
+                        <label>BG Color</label>
+                        <input type="color" value="${state.noPrize.color}"
+                            onchange="updateNoPrize('color', this.value)">
+                    </div>
+                    <div class="field-group field-group--color">
+                        <label>Font Color</label>
+                        <input type="color" value="${state.noPrize.fontColor}"
+                            onchange="updateNoPrize('fontColor', this.value)">
+                    </div>
+                    <div class="field-group field-group--narrow">
+                        <label>Media Type</label>
+                        <select onchange="updateNoPrize('mediaType', this.value)">
+                            <option value="none" ${state.noPrize.mediaType === "none" ? "selected" : ""}>No image/video</option>
+                            <option value="image" ${state.noPrize.mediaType === "image" ? "selected" : ""}>Image</option>
+                            <option value="video" ${state.noPrize.mediaType === "video" ? "selected" : ""}>Video</option>
+                        </select>
+                    </div>
+                    <div class="field-group field-group--url">
+                        <label>Media URL</label>
+                        <input type="url" placeholder="https://..." value="${state.noPrize.mediaUrl}"
+                            onchange="updateNoPrize('mediaUrl', this.value)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
 }
 
 // ── Prize List (settings) ─────────────────────────────────────
@@ -150,6 +267,7 @@ function renderPrizeList() {
                 <div class="field-group field-group--narrow">
                     <label>Media Type</label>
                     <select onchange="updatePrize(${index}, 'mediaType', this.value)">
+                        <option value="none" ${prize.mediaType === "none" ? "selected" : ""}>No image/video</option>
                         <option value="image" ${prize.mediaType === "image" ? "selected" : ""}>Image</option>
                         <option value="video" ${prize.mediaType === "video" ? "selected" : ""}>Video</option>
                     </select>

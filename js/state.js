@@ -46,6 +46,14 @@ const DEFAULT_PRIZES = [
 
 let state = {
   prizes: [],
+  noPrize: {
+    name: "No Prize",
+    rarity: "Common",
+    color: "#808080",
+    fontColor: "#FFFFFF",
+    mediaUrl: "",
+    mediaType: "none",
+  },
   boxCount: 25,
   isAnimating: false,
   disabledBoxes: new Set(),
@@ -76,14 +84,7 @@ function shuffleAndAssignPrizes() {
     }
   });
   while (prizePool.length < state.boxCount) {
-    prizePool.push({
-      name: "No Prize",
-      rarity: "Common",
-      color: "#808080",
-      fontColor: "#FFFFFF",
-      mediaUrl: "",
-      mediaType: "image",
-    });
+    prizePool.push({ ...state.noPrize });
   }
   prizePool.sort(() => Math.random() - 0.5);
   state.prizeAssignments = [...prizePool];
@@ -107,6 +108,14 @@ function loadState() {
     const loaded = JSON.parse(saved);
     state = {
       ...loaded,
+      noPrize: loaded.noPrize || {
+        name: "No Prize",
+        rarity: "Common",
+        color: "#808080",
+        fontColor: "#FFFFFF",
+        mediaUrl: "",
+        mediaType: "none",
+      },
       boxCount: 25,
       isAnimating: false,
       disabledBoxes: new Set(loaded.disabledBoxes || []),
@@ -115,6 +124,14 @@ function loadState() {
     };
   } else {
     state.prizes = deepCopyDefaultPrizes();
+    state.noPrize = {
+      name: "No Prize",
+      rarity: "Common",
+      color: "#808080",
+      fontColor: "#FFFFFF",
+      mediaUrl: "",
+      mediaType: "none",
+    };
     shuffleAndAssignPrizes();
     saveState();
   }

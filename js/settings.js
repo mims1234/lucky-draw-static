@@ -29,6 +29,18 @@ function updatePrize(index, field, value) {
   renderPrizeImages();
 }
 
+function updateNoPrize(field, value) {
+  if (field === "mediaUrl") {
+    state.noPrize.mediaType = detectMediaType(value);
+  }
+  state.noPrize[field] = value;
+  shuffleAndAssignPrizes();
+  saveState();
+  renderBoxes(false);
+  renderPrizeImages();
+  renderNoPrizeSettings();
+}
+
 function deletePrize(index) {
   if (index >= 0 && index < state.prizes.length) {
     state.prizes.splice(index, 1);
@@ -45,6 +57,14 @@ function clearLocalStorage() {
     localStorage.removeItem("luckyDrawState");
     state = {
       prizes: deepCopyDefaultPrizes(),
+      noPrize: {
+        name: "No Prize",
+        rarity: "Common",
+        color: "#808080",
+        fontColor: "#FFFFFF",
+        mediaUrl: "",
+        mediaType: "none",
+      },
       boxCount: 25,
       isAnimating: false,
       disabledBoxes: new Set(),
@@ -54,6 +74,7 @@ function clearLocalStorage() {
     shuffleAndAssignPrizes();
     saveState();
     renderPrizeList();
+    renderNoPrizeSettings();
     renderBoxes(false);
     renderPrizeImages();
     showToast("Reset to default state.");

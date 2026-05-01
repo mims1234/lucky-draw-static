@@ -22,6 +22,7 @@ function initNavigation() {
       } else {
         drawPage.classList.add("hidden");
         settingsPage.classList.remove("hidden");
+        renderNoPrizeSettings();
       }
     });
   });
