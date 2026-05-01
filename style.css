@@ -390,7 +390,6 @@ nav {
     animation: rarityGlow 0.9s ease-in-out infinite !important;
     z-index: 3;
     transform: scale(1.12);
-    border-color: var(--accent-cyan) !important;
 }
 
 /* ── Toggle button ─────────────────────────────────────────── */
