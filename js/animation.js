@@ -24,7 +24,10 @@ async function startAnimation() {
 
   while (Date.now() - startTime < duration) {
     // Remove highlight from all boxes
-    boxes.forEach((b) => b.classList.remove("custom-highlight"));
+    boxes.forEach((b) => {
+      b.classList.remove("highlight");
+      b.classList.remove("custom-highlight");
+    });
 
     const pick = enabledBoxes[Math.floor(Math.random() * enabledBoxes.length)];
     // Add standard highlight class for the fast movement
