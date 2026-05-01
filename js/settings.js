@@ -43,6 +43,14 @@ function updateNoPrize(field, value) {
   renderNoPrizeSettings(); // Re-render to update badge
 }
 
+function updateAnimationHighlightColor(value) {
+  state.animationHighlightColor = value;
+  saveState();
+  // Update CSS variable for highlighting
+  document.documentElement.style.setProperty("--accent-cyan", value);
+  renderAnimationSettings();
+}
+
 function deletePrize(index) {
   if (index >= 0 && index < state.prizes.length) {
     state.prizes.splice(index, 1);
@@ -62,11 +70,12 @@ function clearLocalStorage() {
       noPrize: {
         name: "No Prize",
         rarity: "Common",
-        color: "#808080",
+        color: "#333333",
         fontColor: "#FFFFFF",
         mediaUrl: "",
         mediaType: "none",
       },
+      animationHighlightColor: "#00d4ff",
       boxCount: 25,
       isAnimating: false,
       disabledBoxes: new Set(),
@@ -77,6 +86,7 @@ function clearLocalStorage() {
     saveState();
     renderPrizeList();
     renderNoPrizeSettings();
+    renderAnimationSettings();
     renderBoxes(false);
     renderPrizeImages();
     showToast("Reset to default state.");

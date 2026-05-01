@@ -182,6 +182,26 @@ function renderPrizeImages() {
 
 // ── No Prize Customization (settings) ───────────────────────
 
+function renderAnimationSettings() {
+  const container = document.getElementById("animationSettings");
+  if (!container) return;
+
+  container.innerHTML = `
+        <div class="settings-section">
+            <h2>Animation Settings</h2>
+            <div class="prize-item">
+                <div class="prize-item-fields">
+                    <div class="field-group field-group--color">
+                        <label>Highlight Color</label>
+                        <input type="color" value="${state.animationHighlightColor}"
+                            onchange="updateAnimationHighlightColor(this.value)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
 function renderNoPrizeSettings() {
   const container = document.getElementById("noPrizeSettings");
   if (!container) return;

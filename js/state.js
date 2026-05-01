@@ -45,7 +45,7 @@ const DEFAULT_PRIZES = [
 ];
 
 let state = {
-  prizes: [],
+  prizes: deepCopyDefaultPrizes(),
   noPrize: {
     name: "No Prize",
     rarity: "Common",
@@ -54,6 +54,7 @@ let state = {
     mediaUrl: "",
     mediaType: "none",
   },
+  animationHighlightColor: "#00d4ff",
   boxCount: 25,
   isAnimating: false,
   disabledBoxes: new Set(),
@@ -116,6 +117,7 @@ function loadState() {
         mediaUrl: "",
         mediaType: "none",
       },
+      animationHighlightColor: loaded.animationHighlightColor || "#00d4ff",
       boxCount: 25,
       isAnimating: false,
       disabledBoxes: new Set(loaded.disabledBoxes || []),
@@ -132,6 +134,7 @@ function loadState() {
       mediaUrl: "",
       mediaType: "none",
     };
+    state.animationHighlightColor = "#00d4ff";
     shuffleAndAssignPrizes();
     saveState();
   }
